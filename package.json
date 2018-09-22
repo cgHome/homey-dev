@@ -4,8 +4,8 @@
   "description": "Homey development environment ",
   "main": "app.js",
   "scripts": {
-    "start": "clear; homey athom project --run",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "clear; bash ./start-dev.sh",
+    "test": "clear; homey athom project --run"
   },
   "repository": {
     "type": "git",

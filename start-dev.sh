@@ -2,6 +2,8 @@
 
 echo "Start homey-dev environment"
 
+docker container rm -f homey-dev
+
 docker build -t homey-dev .
 docker run -d -ti -v ${PWD}:/app -p 9229:9229 --rm --name homey-dev homey-dev
 docker exec -ti homey-dev sh -c "athom login"
