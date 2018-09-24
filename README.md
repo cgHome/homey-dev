@@ -4,26 +4,51 @@ Homey development environment
 
 ## Install
 
-Create Project:
+Create Homey-app:
 
 ```bash
-mkdir [homey-app]
-cd [homey-app]
-git init
-touch README.md
-git add README.md
-git remote add origin [repo-url]
-git remote -v
+mkdir [Homey-app]
+cd [Homey-app]
+git init --bare
 ```
 
-Add homey-dev:
+Add homey-dev to your (exiting) project/app:
 
 ```bash
-git subtree add --prefix homey-dev https://github.com/cghome/homey-dev.git master --squash
+git subtree add --prefix homey-dev --squash git@github.com:cghome/homey-dev.git master
 ```
 
-Update homey-dev:
+Update homey-dev to a never version:
 
 ```bash
-git subtree pull --prefix homey-dev https://github.com/cghome/homey-dev.git master --squash
+git subtree pull --prefix homey-dev --squash git@github.com:cghome/homey-dev.git master
 ```
+
+Start homey-dev:
+
+```bash
+homey-dev/start.sh && source ~/.bashrc
+```
+
+Test homey-dev:
+
+```bash
+homey ls -la
+```
+
+Example:
+
+```bash
+homey ls -la
+```
+
+For Developer:
+
+```bash
+# (Edit file)
+git commit -am "[Message]"
+git subtree split --prefix homey-dev --branch split
+git push ${PWD}/homey-dev split:master
+```
+
+OR: Use vscode .....
