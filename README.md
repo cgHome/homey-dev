@@ -2,49 +2,51 @@
 
 Homey development environment
 
-## Install
+## Reason
 
-Create Homey-app:
+## Usage
 
-```bash
-mkdir [Homey-app]
-cd [Homey-app]
-git init --bare
-```
+1. Create Homey-app:
 
-Add homey-dev to your (exiting) project/app:
+    ```sh
+    mkdir [Homey-app]
+    cd [Homey-app]
+    git init --bare
+    ```
 
-```bash
-git subtree add --prefix homey-dev --squash git@github.com:cghome/homey-dev.git master
-```
+2. Add homey-dev to your (exiting) project/app:
 
-Update homey-dev to a never version:
+    ```sh
+    git subtree add --prefix homey-dev --squash https://github.com/cghome/homey-dev.git master
+    ```
 
-```bash
-git subtree pull --prefix homey-dev --squash git@github.com:cghome/homey-dev.git master
-```
+3. Update homey-dev to a never version:
 
-Start homey-dev:
+    ```sh
+    git subtree pull --prefix homey-dev --squash https://github.com/cghome/homey-dev.git master
+    ```
 
-```bash
-homey-dev/start.sh && source ~/.bashrc
-```
+4. Start homey-dev:
 
-Test homey-dev:
+    ```sh
+    homey-dev/start.sh && source ~/.bashrc
+    ```
 
-```bash
-homey ls -la
-```
+5. Test homey-dev:
+
+    ```sh
+    homey ls -la
+    ```
 
 Example:
 
-```bash
+```sh
 homey ls -la
 ```
 
 For Developer:
 
-```bash
+```sh
 # (Edit file)
 git commit -am "[Message]"
 git subtree split --prefix homey-dev --branch split
@@ -52,3 +54,4 @@ git push ${PWD}/homey-dev split:master
 ```
 
 OR: Use vscode .....
+
