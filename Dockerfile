@@ -11,7 +11,6 @@ RUN apk add --update \
     && rm -rf /var/cache/apk/*
      
 RUN npm install -g \
-    nps \
     athom-cli
 
 # Node.js debugger port
