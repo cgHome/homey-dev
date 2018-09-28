@@ -1,7 +1,7 @@
 {
   "name": "homey-dev",
   "version": "0.0.1",
-  "description": "Homey development environment ",
+  "description": "Homey development environment",
   "main": "app.js",
   "scripts": {
     "start": "clear; bash ./start-dev.sh",
@@ -20,6 +20,7 @@
   "keywords": [
     "smart home",
     "homey",
+    "development environment",
     "devices"
   ]
 }

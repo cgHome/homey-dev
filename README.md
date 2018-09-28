@@ -1,38 +1,43 @@
 # homey-dev
 
-Homey development environment
+Homey (docker) development environment
 
 ## Reason
 
 ## Usage
 
-1. Create Homey-app:
+1. Clone Homey-app:
 
     ```sh
-    mkdir [Homey-app]
-    cd [Homey-app]
-    git init --bare
+    git clone https://github.com/cgHome/homey-app.git
     ```
 
-2. Add homey-dev to your (exiting) project/app:
+2. Add homey-dev to .gitignore:
+
+    ```json
+    # homey-dev
+    homey-dev
+    ```
+
+3. Add homey-dev to your project/app:
 
     ```sh
     git subtree add --prefix homey-dev --squash https://github.com/cghome/homey-dev.git master
     ```
 
-3. Update homey-dev to a never version:
+4. Update homey-dev to a never version:
 
     ```sh
     git subtree pull --prefix homey-dev --squash https://github.com/cghome/homey-dev.git master
     ```
 
-4. Start homey-dev:
+5. Start homey-dev:
 
     ```sh
     homey-dev/start.sh && source ~/.bashrc
     ```
 
-5. Test homey-dev:
+6. Test homey-dev:
 
     ```sh
     homey ls -la
