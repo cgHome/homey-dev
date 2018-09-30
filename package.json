@@ -6,7 +6,7 @@
   "scripts": {
     "start": "clear; bash ./start-dev.sh",
     "test": "clear; homey athom project --run",
-    "update-dev": "git submodule update homey-dev"
+    "update-dev": "git submodule foreach git pull"
   },
   "repository": {
     "type": "git",
