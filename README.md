@@ -12,32 +12,25 @@ Homey (docker) development environment
     git clone https://github.com/cgHome/homey-app.git
     ```
 
-2. Add homey-dev to .gitignore:
-
-    ```json
-    # homey-dev
-    homey-dev
-    ```
-
-3. Add homey-dev to your project/app:
+2. Add homey-dev to your project/app:
 
     ```sh
-    git subtree add --prefix homey-dev --squash https://github.com/cghome/homey-dev.git master
+    git submodule add https://github.com/cghome/homey-dev.git homey-dev
     ```
 
-4. Update homey-dev to a never version:
+3. Update homey-dev to a never version:
 
     ```sh
-    git subtree pull --prefix homey-dev --squash https://github.com/cghome/homey-dev.git master
+    git submodule update homey-dev
     ```
 
-5. Start homey-dev:
+4. Init/Start homey-dev:
 
     ```sh
     homey-dev/start.sh && source ~/.bashrc
     ```
 
-6. Test homey-dev:
+5. Test homey-dev:
 
     ```sh
     homey ls -la

@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "start": "clear; bash ./start-dev.sh",
-    "test": "clear; homey athom project --run"
+    "test": "clear; homey athom project --run",
+    "update-dev": "git submodule update homey-dev"
   },
   "repository": {
     "type": "git",
