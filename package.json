@@ -4,9 +4,9 @@
   "description": "Homey development environment",
   "main": "app.js",
   "scripts": {
-    "start": "clear; bash ./start-dev.sh",
-    "test": "clear; homey athom project --run",
-    "update-dev": "git submodule foreach git pull"
+    "start": "bash ./start-dev.sh",
+    "test": "athom project --run",
+    "update": "git submodule foreach git pull"
   },
   "repository": {
     "type": "git",

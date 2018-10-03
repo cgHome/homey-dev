@@ -13,9 +13,11 @@ docker exec -ti homey-dev sh -c "athom login"
 source ~/.bashrc
 if [ -n "$(type -t homey)" ] && [ "$(type -t homey)" = function ];
     then 
-        echo "homey: bash-function already exist (To delete run: unset -f homey && rm ~/.bashrc OR nano ~/.bashrc)";
+        echo "homey: bash-function already exist (To delete run: unset -f homey homey-run && rm ~/.bashrc OR nano ~/.bashrc)";
     else 
         CMD='homey() { ARGS=${@}; docker exec -ti homey-dev sh -c "$ARGS"; }'
+        echo "$CMD" >> ~/.bashrc
+        CMD='homey-run() { ARGS=${@}; homey("npm run-script $ARGS --prefix homey-dev") }'
         echo "$CMD" >> ~/.bashrc
         echo "homey: bash-function added (!Attention! Restart the current terminal-session or run: source ~/.bashrc)";
 fi
