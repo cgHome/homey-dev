@@ -6,7 +6,7 @@
   "scripts": {
     "start": "bash ./start-dev.sh",
     "test": "athom project --run",
-    "update-dev": "git submodule update -f ../homey-dev"
+    "update-dev": "cd .. && git submodule update -f homey-dev"
 
   },
   "repository": {
