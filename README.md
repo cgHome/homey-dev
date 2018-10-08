@@ -9,19 +9,28 @@ Homey (docker) development environment
 1. Clone Homey-app:
 
     ```sh
-    git clone https://github.com/cgHome/homey-app.git
+    git clone --recursive https://github.com/cgHome/homey-app.git
     ```
 
-2. Add homey-dev to your project/app:
+2. Or add homey-dev to your project/app:
 
     ```sh
     git submodule add https://github.com/cghome/homey-dev.git homey-dev
     ```
 
+    2.1 Add last line to .gitmodules file
+
+        ```json
+        [submodule "homey-dev"]
+            path = homey-dev
+            url = https://github.com/cghome/homey-dev.git
+            ignore = all
+        ```
+
 3. Update homey-dev to a never version:
 
     ```sh
-    git submodule update homey-dev
+    git submodule update --init --recursive --force homey-dev
     ```
 
 4. Init/Start homey-dev:
@@ -52,4 +61,3 @@ git push ${PWD}/homey-dev split:master
 ```
 
 OR: Use vscode .....
-
