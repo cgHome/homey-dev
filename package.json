@@ -4,9 +4,11 @@
   "description": "Homey development environment",
   "main": "app.js",
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "bash ./start-dev.sh",
-    "test": "athom project --run",
-    "update-dev": "cd .. && git submodule update --force --checkout --recursive homey-dev"
+    "dev": "athom project --run",
+    "posttest": "athom app validate -",
+    "update-dev": "cd .. && git submodule update --force --init --checkout --recursive --remote homey-dev"
   },
   "repository": {
     "type": "git",
