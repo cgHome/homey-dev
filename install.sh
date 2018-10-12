@@ -33,7 +33,7 @@ fi
 if [ -n "$(type -t homey-start)" ] && [ "$(type -t homey-start)" = function ]; then 
     echo "homey-start bash-function already exist";
 else
-    CMD='homey-start() { docker run -d -ti -v ${PWD}:/app -p 9229:9229 --rm --name ${PWD##*/} homey-dev; }';
+    CMD='homey-start() { docker run -d -ti -v ${PWD}:/app -p 9229:9229 --rm --name ${PWD##*/} cghome/homey-dev; }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
     echo "homey-start bash-function added";
 fi
