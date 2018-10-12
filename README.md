@@ -17,7 +17,7 @@ Attention:
 
 ```bash
 Commands:
-    homey <command>         Run a command inside homey-dev container
+    homey <command>         Run a bash command inside homey-dev container
     homey-run <npm-script>  Run npm-script inside homey-dev container
     homey-create            Create a new homey-app 
     homey-init              Initialize a new homey-dev container
@@ -26,17 +26,24 @@ Commands:
 
 ### Example
 
-## Install npm-scripts
+```bash
+```
+
+## Addon's
+
+### Homey-run (npm) scripts
 
 ```json
 package.json
 
 "scripts": {
     "start":    "clear; athom app --run",
-    "test":    "NODE_ENV=test && npm run start",
+    "test":     "set NODE_ENV=test && npm run start",
     "validate": "clear; athom app validate"
 };
 ```
+
+### Remote (node.js) debuger
 
 ```js
 app.js

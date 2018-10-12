@@ -5,7 +5,7 @@ echo "Install (docker) homey-dev environment"
 # Mac OS X .bashrc not working, to fix see: https://superuser.com/a/244990
 # To delete run: unset -f homey homey-init homey-start homey-create && rm ~/.bashrc OR remove the function on nano ~/.bashrc
 
-# Run a command inside homey-dev container
+# Run a bash command inside homey-dev container
 if [ -n "$(type -t homey)" ] && [ "$(type -t homey)" = function ]; then 
     echo "homey bash-function already exist";
 else
