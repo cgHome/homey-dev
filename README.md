@@ -18,10 +18,10 @@ Attention:
 ```bash
 Commands:
     homey <command>         Run a command inside homey-dev container
-    homey-create            Create a new homey-app
-    homey-init              Initialize homey-dev container
+    homey-run <npm-script>  Run npm-script inside homey-dev container
+    homey-create            Create a new homey-app 
+    homey-init              Initialize a new homey-dev container
     homey-start             Start homey-dev container
-    homey-run <npm-script>  Run npm-script
 ```
 
 ### Example
@@ -33,12 +33,18 @@ package.json
 
 "scripts": {
     "start":    "clear; athom app --run",
-    "debug":    "NODE_ENV=debug && npm run start",
-    "validate": "clear; athom app validate",
-    "test":     "echo \"Error: no test specified\" && exit 1"
+    "test":    "NODE_ENV=test && npm run start",
+    "validate": "clear; athom app validate"
+};
 ```
 
 ```js
-    // Start Node.js debugger
+app.js
+
+// Set internal NODE_ENV variable
+const NODE_ENV = process.env.NODE_ENV || "production";
+// Start Node.js debugger
+if (NODE_ENV !== "production") {
     require('inspector').open(9229, '0.0.0.0', true);
+};
 ```
