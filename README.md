@@ -48,10 +48,12 @@ package.json
 ```js
 app.js
 
-// Set internal NODE_ENV variable
+// Set internal node environment variables
 const NODE_ENV = process.env.NODE_ENV || "production";
+const DEBUGER_PORT = process.env.DEBUGER_PORT || 9229;
+
 // Start Node.js debugger
 if (NODE_ENV !== "production") {
-    require('inspector').open(9229, '0.0.0.0', true);
+    require('inspector').open(DEBUGER_PORT, '0.0.0.0', true);
 };
 ```
