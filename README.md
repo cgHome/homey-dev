@@ -7,21 +7,23 @@ Homey (docker) development environment
 ## Installation
 
 ```bash
-$ wget -O - https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | bash
-
-Attention:
-    Restart the current terminal-session or run: source ~/.bashrc
+wget -O - https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | bash
 ```
+
+### Attention
+
+Restart the current terminal-session or run: source ~/.bashrc
 
 ## Usage
 
+### Commands
+
 ```bash
-Commands:
-    homey <command>         Run a bash command inside homey-dev container
-    homey-run <npm-script>  Run npm-script inside homey-dev container
-    homey-create            Create a new homey-app 
-    homey-init              Initialize a new homey-dev container
-    homey-start             Start homey-dev container
+homey <command>         Run a bash command inside homey-dev container
+homey-run <npm-script>  Run npm-script inside homey-dev container
+homey-create            Create a new homey-app 
+homey-init              Initialize a new homey-dev container
+homey-start             Start homey-dev container
 ```
 
 ### Example
