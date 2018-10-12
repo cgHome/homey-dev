@@ -4,60 +4,41 @@ Homey (docker) development environment
 
 ## Reason
 
+## Installation
+
+```bash
+$ wget -O - https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | bash
+
+Attention:
+    Restart the current terminal-session or run: source ~/.bashrc
+```
+
 ## Usage
 
-1. Clone Homey-app:
-
-    ```sh
-    git clone --recursive https://github.com/cgHome/homey-app.git
-    ```
-
-2. Or add homey-dev to your project/app:
-
-    ```sh
-    git submodule add https://github.com/cghome/homey-dev.git homey-dev
-    ```
-
-    2.1 Add last line to .gitmodules file
-
-        ```json
-        [submodule "homey-dev"]
-            path = homey-dev
-            url = https://github.com/cghome/homey-dev.git
-            ignore = all
-        ```
-
-3. Update homey-dev to a never version:
-
-    ```sh
-    git submodule update --init --recursive --force homey-dev
-    ```
-
-4. Init/Start homey-dev:
-
-    ```sh
-    homey-dev/start.sh && source ~/.bashrc
-    ```
-
-5. Test homey-dev:
-
-    ```sh
-    homey ls -la
-    ```
-
-Example:
-
-```sh
-homey ls -la
+```bash
+Commands:
+    homey <command>         Run a command inside homey-dev container
+    homey-create            Create a new homey-app
+    homey-init              Initialize homey-dev container
+    homey-start             Start homey-dev container
+    homey-run <npm-script>  Run npm-script
 ```
 
-For Developer:
+### Example
 
-```sh
-# (Edit file)
-git commit -am "[Message]"
-git subtree split --prefix homey-dev --branch split
-git push ${PWD}/homey-dev split:master
+## Install npm-scripts
+
+```json
+package.json
+
+"scripts": {
+    "start":    "clear; athom app --run",
+    "debug":    "NODE_ENV=debug && npm run start",
+    "validate": "clear; athom app validate",
+    "test":     "echo \"Error: no test specified\" && exit 1"
 ```
 
-OR: Use vscode .....
+```js
+    // Start Node.js debugger
+    require('inspector').open(9229, '0.0.0.0', true);
+```
