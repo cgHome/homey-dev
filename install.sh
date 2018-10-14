@@ -3,7 +3,7 @@ echo "Install (docker) homey-dev environment"
 
 # Define homey bash-functions
 # Mac OS X .bashrc not working, to fix see: https://superuser.com/a/244990
-# To delete run: unset -f homey homey-init homey-start homey-create && rm ~/.bashrc OR remove the function on nano ~/.bashrc
+# To delete run: unset -f homey homey-run homey-init homey-start homey-create && rm ~/.bashrc OR remove the function on nano ~/.bashrc
 
 # Run a bash command inside homey-dev container
 if [ -n "$(type -t homey)" ] && [ "$(type -t homey)" = function ]; then 
@@ -41,9 +41,9 @@ fi
 if [ -n "$(type -t homey-create)" ] && [ "$(type -t homey-create)" = function ]; then 
     echo "homey-create bash-function already exist";
 else
-    CMD='homey-create() { docker run -it -v ${PWD}:/app --rm homey-dev athom app create && cd $(ls -td */ | head -n1) && homey-init && homey npm init; }';
+    CMD='homey-create() { docker run -it -v ${PWD}:/app --rm --name homey-dev cghome/homey-dev athom app create && cd $(ls -td */ | head -n1) && homey-init && homey npm init; }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
     echo "homey-create bash-function added";
 fi
 
-printf "\n\e[93mAttention: Restart the current terminal-session or run: source ~/.bashrc\e[39m\n\n"
+printf "\n\e[93mAttention: Reload the bashrc-file (source ~/.bashrc) or restart the terminal-session\e[39m\n\n"
