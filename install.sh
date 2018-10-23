@@ -21,19 +21,15 @@ else
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
     echo "homey-run bash-function added";
 fi
-# Initialize homey-dev container
-if [ -n "$(type -t homey-init)" ] && [ "$(type -t homey-init)" = function ]; then 
-    echo "homey-init bash-function already exist";
-else
-    CMD='homey-init() { docker container rm -f ${PWD##*/}; homey-start &&  homey athom login; }';
-    echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
-    echo "homey-init bash-function added";
-fi
 # Start homey-dev container
 if [ -n "$(type -t homey-start)" ] && [ "$(type -t homey-start)" = function ]; then 
     echo "homey-start bash-function already exist";
 else
-    CMD='homey-start() { docker run -d -ti -v ${PWD}:/app -p 9229:9229 --rm --name ${PWD##*/} cghome/homey-dev; }';
+    CMD='homey-start() { 
+        [[ $(docker ps -a --filter="name=${PWD##*/}" -q | xargs) ]] && echo "Container $(docker container rm -f ${PWD##*/}) removed";
+        docker run -d -it -v ${PWD}:/app -p 9229:9229 -e GIT_USERNAME="$(git config user.name)" --rm --name ${PWD##*/} cghome/homey-dev && echo "Container ${PWD##*/} started"        
+        homey athom login;
+    }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
     echo "homey-start bash-function added";
 fi
@@ -41,7 +37,13 @@ fi
 if [ -n "$(type -t homey-create)" ] && [ "$(type -t homey-create)" = function ]; then 
     echo "homey-create bash-function already exist";
 else
-    CMD='homey-create() { docker run -it -v ${PWD}:/app --rm --name homey-dev cghome/homey-dev athom app create && cd $(ls -td */ | head -n1) && homey-init && homey npm init; }';
+    CMD='homey-create() { 
+        docker run -d -it -v ${PWD}:/app -e GIT_USERNAME="$(git config user.name)" --name homey-dev cghome/homey-dev && 
+        docker exec -it homey-dev sh -c "athom login && athom app create" &&  
+        docker exec -it homey-dev sh -c "cd $(ls -td */ | head -1) && npm init -y" && 
+        docker container rm -f homey-dev && 
+        cd $(ls -td */ | head -n1) && homey-start;
+    }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
     echo "homey-create bash-function added";
 fi

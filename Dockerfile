@@ -13,6 +13,9 @@ RUN apk add --update \
 RUN npm install -g \
     athom-cli
 
+COPY .npm-init.js /root
+RUN npm config set init-module /root/.npm-init.js -g
+
 # Node.js debugger port
 EXPOSE 9229     
 VOLUME [ "/app" ]
