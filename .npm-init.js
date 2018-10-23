@@ -1,4 +1,4 @@
-const appJson = require('./app.json');
+const appJson = require('/app/app.json');
 
 const GIT_URL = process.env.GIT_URL || 'https://github.com';
 const GIT_USER = process.env.GIT_USERNAME || 'YOUR_GIT_USERNAME';

@@ -7,6 +7,7 @@ WORKDIR /app
 RUN apk add --update \
     bash \
     man \
+    nano \
     git \
     && rm -rf /var/cache/apk/*
      
