@@ -18,13 +18,6 @@ const data = {
         email: appJson.author.email,
     },
     license: "GPLv3",
-    repository: {
-        type: "git",
-        url: gitRepo + ".git"
-    },
-    bugs: {
-        url: gitRepo + "/issues"
-    },
     homepage: "https://apps.athom.com/app/" + appJson.id,
 };
 
