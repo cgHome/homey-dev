@@ -1,4 +1,4 @@
-const appJson = require('./app.json');
+const appJson = require(filename + '/app.json');
 
 const data = {
     name: appJson.id,
