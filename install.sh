@@ -27,7 +27,7 @@ if [ -n "$(type -t homey-start)" ] && [ "$(type -t homey-start)" = function ]; t
 else
     CMD='homey-start() { 
         [[ $(docker ps -a --filter="name=${PWD##*/}" -q | xargs) ]] && echo "Container $(docker container rm -f ${PWD##*/}) removed";
-        docker run -d -it -v ${PWD}:/app -p 9229:9229 -e GIT_USERNAME="$(git config user.name)" --rm --name ${PWD##*/} cghome/homey-dev && echo "Container ${PWD##*/} started"        
+        docker run -d -it -v ${PWD}:/app -p 9229:9229 -e GIT_USERNAME="$(git config user.name)" --rm --name ${PWD##*/} cghome/homey-dev && echo "Container ${PWD##*/} started";        
         homey athom login;
     }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
@@ -35,7 +35,7 @@ else
 fi
 # Create a new homey-app
 if [ -n "$(type -t homey-createApp)" ] && [ "$(type -t homey-createApp)" = function ]; then 
-    echo "homey-create bash-function already exist";
+    echo "homey-createApp bash-function already exist";
 else
     CMD='homey-createApp() { 
         docker run -d -it -v ${PWD}:/app -e GIT_USERNAME="$(git config user.name)" --name homey-dev cghome/homey-dev && 
