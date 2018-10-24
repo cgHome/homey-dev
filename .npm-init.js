@@ -1,3 +1,5 @@
+console.log(filename + basename + dirname);
+
 const appJson = require(filename + '/app.json');
 
 const data = {
