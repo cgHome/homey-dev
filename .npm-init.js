@@ -1,6 +1,4 @@
-console.log(filename + basename + dirname);
-
-const appJson = require(filename + '/app.json');
+const appJson = require(dirname + '/app.json');
 
 const data = {
     name: appJson.id,
