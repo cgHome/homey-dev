@@ -27,7 +27,12 @@ if [ -n "$(type -t homey-start)" ] && [ "$(type -t homey-start)" = function ]; t
 else
     CMD='homey-start() { 
         [[ $(docker ps -a --filter="name=${PWD##*/}" -q | xargs) ]] && echo "Container $(docker container rm -f ${PWD##*/}) removed";
-        docker run -d -it -v ${PWD}:/app -p 9229:9229 -e GIT_USERNAME="$(git config user.name)" --rm --name ${PWD##*/} cghome/homey-dev && echo "Container ${PWD##*/} started";        
+        docker run -d -it --rm \
+            -p 9229:9229 \
+            --name ${PWD##*/} \
+            --mount type=bind,source=${PWD},target=/app \
+            --mount type=bind,source=${HOME}/.gitconfig,target=/root/.gitconfig \
+            cghome/homey-dev && echo "Container ${PWD##*/} started";
         homey athom login;
     }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
@@ -38,14 +43,20 @@ if [ -n "$(type -t homey-createApp)" ] && [ "$(type -t homey-createApp)" = funct
     echo "homey-createApp bash-function already exist";
 else
     CMD='homey-createApp() { 
-        docker run -d -it -v ${PWD}:/app -e GIT_USERNAME="$(git config user.name)" --name homey-dev cghome/homey-dev && 
-        docker exec -it homey-dev sh -c "athom login && athom app create" &&  
-        docker exec -it homey-dev sh -c "cd $(ls -td */ | head -1) && npm init -y" && 
-        docker container rm -f homey-dev && 
-        cd $(ls -td */ | head -n1) && homey-start;
+        docker run -d -it \
+            --name homey-dev \
+            --mount type=bind,source=${PWD},target=/app \
+            --mount type=bind,source=${HOME}/.gitconfig,target=/root/.gitconfig \
+            cghome/homey-dev &&
+        docker exec -it homey-dev sh -c "athom login && athom app create" &&
+        docker exec -it homey-dev sh -c "cd $(ls -td */ | head -1) && npm init -y" &&
+        docker exec -it homey-dev sh -c "cd $(ls -td */ | head -1) && git init && git add . && git commit -m 'Initial commit' && git remote add origin 'https://github.com/'$(git config user.name)'/'${PWD##*/}'.git' && git remote -v" &&
+        docker container rm -f homey-dev &&
+        cd $(ls -td */ | head -n1) &&
+        homey-start;
     }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
-    echo "homey-create bash-function added";
+    echo "homey-createApp bash-function added";
 fi
 
 printf "\n\e[93mAttention: Reload the bashrc-file (source ~/.bashrc) or restart the terminal-session\e[39m\n\n"

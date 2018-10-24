@@ -1,9 +1,4 @@
-const appJson = require('/app/app.json');
-
-const GIT_URL = process.env.GIT_URL || 'https://github.com';
-const GIT_USER = process.env.GIT_USERNAME || 'YOUR_GIT_USERNAME';
-
-const gitRepo = GIT_URL + "/" + GIT_USER + "/" + appJson.id;
+const appJson = require('${filename}/app.json');
 
 const data = {
     name: appJson.id,
@@ -42,6 +37,6 @@ exports.scripts = Object.assign({}, package.scripts || {}, data.scripts);
 exports.keywords = [ ...new Set([].concat(package.keywords || [], data.keywords))];
 exports.author = data.author;
 exports.license = package.license || data.license;         //** License-id not exist (use default) **
-exports.repository = package.repository || data.repository;
-exports.bugs = package.bugs || data.bugs;
+exports.repository = package.repository || null;
+exports.bugs = package.bugs || null;
 exports.homepage = package.homepage || data.homepage;

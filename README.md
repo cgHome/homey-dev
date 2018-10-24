@@ -14,18 +14,16 @@ Homey-Dev ist eine Entwicklungs-Umgebung, bestehend aus einer normalen Homey-App
 
 ## Requirements
 
-Github:
+Configure git on host
 
-    Setting up your github username:
     $ git config --global user.name ["NAME"]
-    OR:
-    $ git config user.name ["NAME"]
-
+    $ git config --global user.email ["name@example.com"]
+    $ git config --global color.ui auto
+  
 ## Installation
 
 ```bash
-curl -L https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | sh && source ~/.bashrc
-# curl -s https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | bash && source ~/.bashrc
+curl -s https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | bash && source ~/.bashrc
 ```
 
 ### Uninstall
