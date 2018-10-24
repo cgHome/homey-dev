@@ -15,10 +15,11 @@ Homey-Dev ist eine Entwicklungs-Umgebung, bestehend aus einer normalen Homey-App
 ## Requirements
 
 Github:
+
     Setting up your github username:
-        $ git config --global user.name ["NAME"]
-        OR:
-        $ git config user.name ["NAME"]
+    $ git config --global user.name ["NAME"]
+    OR:
+    $ git config user.name ["NAME"]
 
 ## Installation
 
@@ -30,11 +31,11 @@ curl -L https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | s
 ### Uninstall
 
 ```bash
-unset -f homey homey-run homey-init homey-start homey-create && rm ~/.bashrc
+unset -f homey homey-run homey-start homey-createApp && rm ~/.bashrc
 
 # OR remove the homey bash-functions on ~/.bashrc
 
-unset -f homey homey-run homey-init homey-start homey-create && nano ~/.bashrc
+unset -f homey homey-run homey-start homey-createApp && nano ~/.bashrc
 
 ```
 
@@ -50,8 +51,8 @@ unset -f homey homey-run homey-init homey-start homey-create && nano ~/.bashrc
 homey <command>         Run a bash command inside homey-dev container
 homey-run <npm-script>  Run a npm-script inside homey-dev container
 
-homey-create            Create a new homey-app
 homey-start             Start a homey-dev container
+homey-createApp         Create a new homey-app
 ```
 
 ### Example
@@ -65,23 +66,18 @@ Install (docker) homey-dev environment
 homey bash-function added
 homey-run bash-function added
 homey-start bash-function added
-homey-create bash-function added
+homey-createApp bash-function added
 
 Attention: Reload the bashrc-file (source ~/.bashrc) or restart the terminal-session
 ```
 
-#### Step 2a: Create Homey-App
+#### Step 2: Create Homey-App
 
 ```bash
 
 ```
 
-#### Step 2b: Init Homey-Dev docker-container
-
-```bash
-```
-
-#### Step x: Start Homey-Dev docker-container
+#### Step 3: Start Homey-Dev docker-container
 
 ```bash
 ```

@@ -34,10 +34,10 @@ else
     echo "homey-start bash-function added";
 fi
 # Create a new homey-app
-if [ -n "$(type -t homey-create)" ] && [ "$(type -t homey-create)" = function ]; then 
+if [ -n "$(type -t homey-createApp)" ] && [ "$(type -t homey-createApp)" = function ]; then 
     echo "homey-create bash-function already exist";
 else
-    CMD='homey-create() { 
+    CMD='homey-createApp() { 
         docker run -d -it -v ${PWD}:/app -e GIT_USERNAME="$(git config user.name)" --name homey-dev cghome/homey-dev && 
         docker exec -it homey-dev sh -c "athom login && athom app create" &&  
         docker exec -it homey-dev sh -c "cd $(ls -td */ | head -1) && npm init -y" && 
