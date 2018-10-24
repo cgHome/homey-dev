@@ -1,4 +1,4 @@
-const appJson = require('${filename}/app.json');
+const appJson = require('./app.json');
 
 const data = {
     name: appJson.id,
@@ -34,7 +34,7 @@ exports.version = data.version;
 exports.description = package.description || data.description;
 exports.main = package.main || data.main;
 exports.scripts = Object.assign({}, package.scripts || {}, data.scripts);
-exports.keywords = [ ...new Set([].concat(package.keywords || [], data.keywords))];
+exports.keywords = [...new Set([].concat(package.keywords || [], data.keywords))];
 exports.author = data.author;
 exports.license = package.license || data.license;         //** License-id not exist (use default) **
 exports.repository = package.repository || null;
