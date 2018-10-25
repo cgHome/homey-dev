@@ -17,7 +17,7 @@ const data = {
         name: appJson.author.name,
         email: appJson.author.email,
     },
-    license: "GPLv3",
+    license: "GPL3",
     homepage: "https://apps.athom.com/app/" + appJson.id,
 };
 
