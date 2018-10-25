@@ -4,12 +4,18 @@ LABEL maintainer="Chris Gross <cghome [at] cFlat-inc.org>"
 
 WORKDIR /app
 
+# Add testing repo for hub
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
+
 RUN apk add --update \
     bash \
     man \
-    nano \
     git \
+    hub \
+    nano \
     && rm -rf /var/cache/apk/*
+
+RUN alias git=hub
      
 RUN npm install -g \
     athom-cli
