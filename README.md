@@ -16,6 +16,7 @@ Homey-Dev ist eine Entwicklungs-Umgebung, bestehend aus einer normalen Homey-App
 
 Configure git on host
 
+    $ git config --global hub.protocol https
     $ git config --global user.name ["NAME"]
     $ git config --global user.email ["name@example.com"]
     $ git config --global color.ui auto

@@ -15,7 +15,7 @@ RUN apk add --update \
     nano \
     && rm -rf /var/cache/apk/*
 
-RUN alias git=hub
+RUN echo 'alias git=hub' >> ~/.bashrc
      
 RUN npm install -g \
     athom-cli

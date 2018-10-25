@@ -32,6 +32,7 @@ else
             --name ${PWD##*/} \
             --mount type=bind,source=${PWD},target=/app \
             --mount type=bind,source=${HOME}/.gitconfig,target=/root/.gitconfig \
+            --env GITHUB_USER=$(git config user.name) \
             cghome/homey-dev && echo "Container ${PWD##*/} started";
         homey athom login;
     }';
@@ -47,10 +48,11 @@ else
             --name homey-dev \
             --mount type=bind,source=${PWD},target=/app \
             --mount type=bind,source=${HOME}/.gitconfig,target=/root/.gitconfig \
+            --env GITHUB_USER=$(git config user.name) \
             cghome/homey-dev &&
         docker exec -it homey-dev sh -c "athom login && athom app create" &&
         docker exec -it homey-dev sh -c "cd $(ls -td */ | head -1) && npm init -y" &&
-        docker exec -it homey-dev sh -c "cd $(ls -td */ | head -1) && git init && git add . && git commit -m 'Initial commit' && git init --bare ../${PWD##*/}'.git' && git remote add origin 'https://github.com/'$(git config user.name)'/'${PWD##*/}'.git' && git remote -v && git push -u origin master" &&
+        docker exec -it homey-dev sh -c "cd $(ls -td */ | head -1) && git init && git add . && git commit -m 'Initial commit' && git create -d "Homey-Dev sample app" && git push -u origin master" &&
         docker container rm -f homey-dev &&
         cd $(ls -td */ | head -n1) &&
         homey-start;
