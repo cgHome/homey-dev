@@ -5,9 +5,8 @@ LABEL maintainer="Chris Gross <cghome [at] cFlat-inc.org>"
 WORKDIR /app
 
 # Add testing repo for hub
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
-
-RUN apk add --update \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+    && apk add --update \
     bash \
     man \
     git \
@@ -15,6 +14,7 @@ RUN apk add --update \
     nano \
     && rm -rf /var/cache/apk/*
 
+# Not working [need to be fixed]
 RUN echo 'alias git=hub' >> /root/.bashrc
      
 RUN npm install -g \
@@ -27,4 +27,5 @@ RUN npm config set init-module /root/.npm-init.js -g
 EXPOSE 9229     
 VOLUME [ "/app" ]
 
+SHELL ["/bin/bash", "-c"]
 CMD /bin/bash

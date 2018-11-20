@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 echo "Install (docker) homey-dev environment"
 
-# Define homey bash-functions
 # Mac OS X .bashrc not working, to fix see: https://superuser.com/a/244990
 # To delete run: unset -f homey homey-run homey-init homey-start homey-create && rm ~/.bashrc OR remove the function on nano ~/.bashrc
 
+# Load current bashrc-file
+[[ -f ~/.bashrc ]] && source ~/.bashrc || echo "~/.bashrc not exist";
+
 # Run a bash command inside homey-dev container
-if [ -n "$(type -t homey)" ] && [ "$(type -t homey)" = function ]; then 
+if [[ -n "$(declare -F homey)" ]]; then 
     echo "homey bash-function already exist";
 else
     CMD='homey() { ARGS=${@}; docker exec -ti ${PWD##*/} sh -c "$ARGS"; }';
@@ -14,7 +16,7 @@ else
     echo "homey bash-function added";
 fi
 # Run npm-script inside homey-dev container
-if [ -n "$(type -t homey-run)" ] && [ "$(type -t homey-run)" = function ]; then 
+if [[ -n "$(declare -F homey-run)" ]]; then 
     echo "homey-run bash-function already exist";
 else 
     CMD='homey-run() { ARGS=${@}; homey npm run-script "$ARGS"; }';
@@ -22,7 +24,7 @@ else
     echo "homey-run bash-function added";
 fi
 # Start homey-dev container
-if [ -n "$(type -t homey-start)" ] && [ "$(type -t homey-start)" = function ]; then 
+if [[ -n "$(declare -F homey-start)" ]]; then 
     echo "homey-start bash-function already exist";
 else
     CMD='homey-start() { 
@@ -30,32 +32,48 @@ else
         docker run -d -it --rm \
             -p 9229:9229 \
             --name ${PWD##*/} \
-            --mount type=bind,source=${PWD},target=/app \
-            --mount type=bind,source=${HOME}/.gitconfig,target=/root/.gitconfig \
+            --hostname ${PWD##*/}.homey-dev \
+            --mount type=bind,source=${PWD},target=/app,consistency=default \
+            --mount type=bind,source=${HOME}/.gitconfig,target=/root/.gitconfig,consistency=default \
             --env GITHUB_USER=$(git config user.name) \
-            cghome/homey-dev && echo "Container ${PWD##*/} started";
-        homey athom login;
+            cghome/homey-dev &&
+        homey athom login && 
+        echo "Container ${PWD##*/} started";
     }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
     echo "homey-start bash-function added";
 fi
 # Create a new homey-app
-if [ -n "$(type -t homey-createApp)" ] && [ "$(type -t homey-createApp)" = function ]; then 
+if [[ -n "$(declare -F homey-createApp)" ]]; then 
     echo "homey-createApp bash-function already exist";
 else
-    CMD='homey-createApp() { 
-        docker run -d -it \
+    CMD='homey-createApp() {
+        read -p "Do you wish to create a homey-app & dev-container? (y/N)" -n 1 -r -t 3 
+        if [[ ! $REPLY =~ ^[Yy]$ ]] ;then
+            [[ "$0" = "$BASH_SOURCE" ]] && exit 1 || return 1
+        fi
+        [[ $(docker ps -a --filter="name=homey-dev" -q | xargs) ]] && echo "Container $(docker container rm -f homey-dev) removed";
+        echo "Start homey-dev container..." &&
+        docker run -d -it --rm \
             --name homey-dev \
-            --mount type=bind,source=${PWD},target=/app \
-            --mount type=bind,source=${HOME}/.gitconfig,target=/root/.gitconfig \
+            --hostname homey-dev \
+            --mount type=bind,source=${PWD},target=/app,consistency=default \
+            --mount type=bind,source=${HOME}/.gitconfig,target=/root/.gitconfig,consistency=default \
             --env GITHUB_USER=$(git config user.name) \
             cghome/homey-dev &&
+        echo "Create homey-app..." &&
         docker exec -it homey-dev sh -c "athom login && athom app create" &&
-        docker exec -it homey-dev sh -c "cd $(ls -td */ | head -1) && npm init -y" &&
-        docker exec -it homey-dev sh -c "cd $(ls -td */ | head -1) && git init && git add . && git commit -m 'Initial commit' && git create -d "Homey-Dev sample app" && git push -u origin master" &&
         docker container rm -f homey-dev &&
-        cd $(ls -td */ | head -n1) &&
-        homey-start;
+        cd $(ls -td */ | head -n1) && 
+        homey-start &&
+        echo "Create ${PWD##*/} git repository..." &&
+        git init &&
+        homey npm init -y 1>/dev/null && 
+        homey npm run createRepo &&
+        git add . && git commit -m '\''Initial commit'\'' &&       
+        git push -u origin master &&
+        echo "Homey-App ${PWD##*/} & Dev container created";
+        echo
     }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
     echo "homey-createApp bash-function added";
