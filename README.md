@@ -4,19 +4,19 @@ Homey (docker) development environment
 
 ## Intro
 
-Nachdem mein alter MacMini gestorben war (RIP), habe ich beschlossen, dass mein neuer Computer (MacBook Pro) keinen "Node.js Versions Messi" mehr sein wird. Denn verschiedene Server-Applikationen brauchen unterschiedliche Konfigurationen und Versionen, die man laden und verwalten muss. Wenn zum Beispiel, ein Server eine zeitlang nicht mehr verwendet wurde, ist die Wahrscheinlichkeit gross, dass dieser nicht mehr einwandfrei funktioniert und man zuerst das Ganze wieder aufwendig korrigieren muss. Nur um danach festzustellen, dass es jetzt bei einer anderen Server-Konfiguration zu neuen Problemen kommt.
+After my old MacMini had died (RIP), I decided that my new computer (MacBook Pro) should no longer be a "Node.js Versions Messi". Because different server applications need different configurations and versions to load and manage. For example, if a Node.js app has not been used for a while, there is a good chance that it won't work properly anymore and you have to adapt the whole environment first. Only to find out afterwards that there are new problems with another server app.
 
-> **Aus diesem Grund installiere ich, keinen (Nodejs-App, DB, etc.) Server mehr auf dem Computer, sondern erstelle für alle ein separates Docker-Image.**
+> **For this reason, I no longer install a server (Nodejs app, DB, etc.) directly on the computer, but create a separate docker image/container for all of them.**
 
 ## What is Homey-Dev ???
 
-Homey-Dev ist eine Entwicklungs-Umgebung, bestehend aus einer normalen Homey-App sowie einer Laufzeitumgebung ([via athom-cli](https://github.com/athombv/node-athom-cli)) in einem Docker-Container. Die Steuerung des Containers erfolgt über diverse Kommandos ([siehe Usage](#usage)), die als bash-functions bei der Installation definiert werden. Des weiteren kann man via homey-run, npm-scripts im Container starten, sowie die Homey-App remote debuggen ([siehe ](#add-ons)).
+Homey-Dev is a development environment consisting of the normal homey app and a runtime environment ([via athom-cli](https://github.com/athombv/node-athom-cli)) in a docker container. The container is controlled by various commands ([see Usage](#usage)), which are defined as "bash-functions" during installation. Furthermore you can start commands via homey-run (aka npm-scripts) in the container and debug the homey app remotely.
 
 ## Pre-requisites
 
 - Bash compatible OS (Tested with macOS Mojave)
-- [Docker](https://www.docker.com/products/docker)
-- Git
+- [Docker](https://www.docker.com/products/docker) installed
+- Git installed
 - Github account
 - Athom developer account
 
@@ -30,16 +30,18 @@ curl -s https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | b
 
 ### Configure git on host-os
 
-    $ git config --global hub.protocol https
+    git config --global hub.protocol https
 
-    $ git config --global credential.helper store
-    $ git config --global credential.helper 'cache --timeout 7200'
+    git config --global credential.helper store
+    git config --global credential.helper 'cache --timeout 7200'
 
-    $ git config --global user.name ["GITUSER_NAME"]
-    $ git config --global user.email ["name@example.com"]
+    git config --global user.name ["GITUSER_NAME"]
+    git config --global user.email ["name@example.com"]
 
-    $ git config --global color.ui auto
-    $ git config --global format.pretty oneline
+    Optional:
+
+    git config --global color.ui auto
+    git config --global format.pretty oneline
 
 ## Uninstall
 
@@ -71,45 +73,45 @@ homey-createApp         Create a new homey-app & homey-dev container
 ### homey-run commands
 
 ```bash
-test                    ..
-build                   ..
-vbuild                  ..
-deploy                  ..
-release                 ..
-init:app                ..
+test                    Run a Homey App in development/debug mode
+install                 Install a Homey App
+build                   Build a Homey App for publishing
+vbuild                  Update a Homey App version and build it.
+deploy:xxx              Workflow: vbuild, push & relase on github and publish them to the Homey Apps Store.
+deploy:major            - MAJOR version when you make incompatible API changes.
+deploy:minor            - MINOR version when you add functionality in a backwards-compatible manner, and
+deploy:patch            - PATCH version when you make backwards-compatible bug fixes. (see semver.org)
+release                 Push and relase/tag a Homey-App on github
+init:app                (Re)Initialize Homey-App based on homey-app/app.json (see .npm-init.js)
 ```
 
 ## Example
 
+(There is also a sample app see: [org.cflat-inc.homey-app](https://github.com/cgHome/org.cflat-inc.homey-app))
+
 ### Step 1: Install Homey-Dev
 
 ```bash
-$ curl -s https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | bash && source ~/.bashrc
-
-Install (docker) homey-dev environment
-homey bash-function added
-homey-run bash-function added
-homey-start bash-function added
-homey-createApp bash-function added
-
-Attention: Reload the bashrc-file (source ~/.bashrc) or restart the terminal-session
+curl -s https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | bash && source ~/.bashrc
 ```
 
-### Step 2: Create Homey-App
+### Step 2: Create a Homey-App
 
 ```bash
-$ homey-createApp
+cd ../[repo]
+homey-createApp
 ```
 
-### Step 3: Start Homey-Dev docker-container
+### Step 2a: Or (if app exist) start Homey-Dev docker-container
 
 ```bash
-$ homey-start
+cd ../repo/[homey-app]
+homey-start
 ```
 
-## Add Remote (node.js) debuger
+### Step 3: Add Remote (node.js) debuger
 
-### Replace app.js
+#### Replace app.js
 
 ```js
 'use strict';
@@ -134,7 +136,7 @@ class App extends Homey.App {
 module.exports = App;
 ```
 
-### Add to (VS Code) launch.json
+#### Add to (VS Code) launch.json
 
 ```json
 {
@@ -146,6 +148,27 @@ module.exports = App;
     "localRoot": "${workspaceFolder}",
     "remoteRoot": "/",
 }
+```
+
+### Step 4: Happy coding & testing
+
+```bash
+cd ../repo/[homey-app]
+homey-run test
+```
+
+### Step 5: Deploy/Relase the Homey App on github and publish them to the Homey Apps Store
+
+```bash
+cd ../repo/[homey-app]
+homey-run deploy:xxx
+```
+
+### Step 5a: Install App on your homey
+
+```bash
+cd ../repo/[homey-app]
+homey-run install
 ```
 
 ## Changelog
