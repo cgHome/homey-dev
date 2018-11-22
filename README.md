@@ -105,7 +105,7 @@ homey-createApp
 ### Step 2a: Or (if app exist) start Homey-Dev docker-container
 
 ```bash
-cd ../repo/[homey-app]
+cd ../[repo]/[homey-app]
 homey-start
 ```
 
@@ -153,21 +153,24 @@ module.exports = App;
 ### Step 4: Happy coding & testing
 
 ```bash
-cd ../repo/[homey-app]
+cd ../[repo]/[homey-app]
+
 homey-run test
 ```
 
 ### Step 5: Deploy/Relase the Homey App on github and publish them to the Homey Apps Store
 
 ```bash
-cd ../repo/[homey-app]
+cd ../[repo]/[homey-app]
+
 homey-run deploy:xxx
 ```
 
 ### Step 5a: Install App on your homey
 
 ```bash
-cd ../repo/[homey-app]
+cd ../[repo]/[homey-app]
+
 homey-run install
 ```
 
