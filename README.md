@@ -12,7 +12,7 @@ After my old MacMini had died (RIP), I decided that my new computer (MacBook Pro
 
 Homey-Dev is a development environment consisting of the normal Homey-App and a runtime environment ([via athom-cli](https://github.com/athombv/node-athom-cli)) in a (Homey-Dev) docker container. The container is controlled by various commands (see [Bash commands](#bash-commands)), which are defined as "bash-functions" during installation.
 
-Furthermore, different Build-Tools commands are integrated, which are implemented as [npm-scripts](#homey-dev-build-tools) and can be used with "homey-run ..." or "npm run ..." (If node.js is installed on host) can be started. In addition, a remote debugger can be defined for the Homey-App in development mode.
+Furthermore, different Build-Tools commands are integrated, which are implemented as [npm-scripts](#homey-dev-build-tools) and can be used with "homey-run ..." or "npm run ..." (If node.js is installed on host). In addition, a remote debugger can be defined for the Homey-App in development mode.
 
 ## Pre-requisites
 
