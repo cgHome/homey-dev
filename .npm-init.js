@@ -25,7 +25,7 @@ const data = {
         "createRepo": "npm run -s _homeyRun -- createRepo || hub create -d \"$npm_package_description\" -h $npm_package_homepage $npm_package_name && npm run init:app",
         "build": "npm run -s _homeyRun -- build || athom app build && npm run init:app",
         "vbuild": "npm run -s _homeyRun -- vbuild || athom app version",
-        "postvbuild": "npm run init:app && npm run _postvbuild && git push origin master",
+        "postvbuild": "npm run -s _homeyRun -- postvbuild || npm run init:app && npm run _postvbuild && git push origin master",
         "_postvbuild": "git commit -am v$npm_package_version",
         "_homeyRun": "homeyRun() { source ~/.bashrc && [[ \"$(type -t homey-run)\" = function ]] && homey-run -s $1 && exit 0; }; homeyRun"
     },
