@@ -70,7 +70,7 @@ unset -f homey homey-run homey-start homey-createApp && nano ~/.bashrc
 unset -f homey homey-run homey-start homey-createApp && nano ~/.bashrc
 curl -s https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | bash && source ~/.bashrc
 
-# Start new Homey-Dev container
+# Start new Homey-Dev app-container
 [app-root] homey-start
 ```
 
@@ -97,12 +97,10 @@ info                    Homey-App (container) information
 test                    Run a Homey-App in development/debug mode
 install                 Install a Homey-App
 build                   Build a Homey-App for publishing
-vbuild                  Update a Homey-App version and build it.
-deploy:xxx              Workflow: vbuild, push & relase on github and publish them to the Homey Apps Store.
+deploy:xxx              Workflow: build, push & relase on github and publish them to the Homey Apps Store.
 deploy:major            - MAJOR version when you make incompatible API changes.
 deploy:minor            - MINOR version when you add functionality in a backwards-compatible manner, and
 deploy:patch            - PATCH version when you make backwards-compatible bug fixes. (see semver.org)
-release                 Push and relase/tag a Homey-App on github
 init:app                (Re)Initialize package.json based on homey-app/app.json (see .npm-init.js)
 
 [User-Scripts]          User defined npm-scripts.
@@ -112,10 +110,10 @@ init:app                (Re)Initialize package.json based on homey-app/app.json 
 
 ```json
 # Format
-"[Name]": "npm run -s _homeyRun -- [Name] || [Container-Command]"
+"[Name]": "npm run -s _homeyRun -- [Name] && exit; [App-Container commands]"
 
 # Sample
-"foo": "npm run -s _homeyRun -- foo || echo \"(${HOSTNAME}) >> bar\" "
+"foo": "npm run -s _homeyRun -- foo && exit; echo \">> bar on: (${HOSTNAME})\" "
 ```
 
 ## Working with
@@ -215,6 +213,10 @@ module.exports = App;
 
 ## Changelog
 
+v0.2.1
+
+- _homeyRun dedection fixed
+
 v0.2.0
 
 - Homey-Dev Build-Tools added
@@ -225,7 +227,7 @@ v0.1.0
 
 ## ToDo
 
-- (none)
+- See [homey-dev/pulls](https://github.com/cgHome/homey-dev/pulls)
 
 ## Copyright and license
 
