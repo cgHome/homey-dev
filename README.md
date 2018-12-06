@@ -95,7 +95,7 @@ homey-createApp         Create a new homey-app & homey-dev container
 ```bash
 info                    Homey-App (container) information
 test                    Run a Homey-App in development/debug mode
-install                 Install a Homey-App
+setup                   Setup (install) a Homey-App
 build                   Build a Homey-App for publishing
 deploy:xxx              Workflow: build, push & relase on github and publish them to the Homey Apps Store.
 deploy:major            - MAJOR version when you make incompatible API changes.
@@ -201,17 +201,21 @@ module.exports = App;
 [app-root] npm run deploy:minor         <- (*1)
 ```
 
-### Step 5a: Or install App on your homey
+### Step 5a: Or setup/install App on your homey
 
 ```bash
-[app-root] homey-run install
+[app-root] homey-run setup
 
-[app-root] npm run install              <- (*1)
+[app-root] npm run setup              <- (*1)
 ```
 
 (*1 = If node.js is installed on host)
 
 ## Changelog
+
+v0.2.2
+
+- npm-script 'install' to 'setup' renamed
 
 v0.2.1
 

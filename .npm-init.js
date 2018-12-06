@@ -15,7 +15,7 @@ const data = {
     scripts: {
         "info": "npm run -s _homeyRun -- info && exit; printf \"[Homey-App] \t $npm_package_name \n Version: \t v$npm_package_version \n Description: \t $npm_package_description \n Host: \t\t ${HOSTNAME} \n\nEnvironment variables:\n\n \" ",
         "test": "npm run -s _homeyRun -- test && exit; athom app run",
-        "install": "npm run -s _homeyRun -- install && exit; athom app install",
+        "setup": "npm run -s _homeyRun -- setup && exit; athom app install",
         "build": "npm run -s _homeyRun -- build && exit; athom app build && npm run init:app",
         "deploy:patch": "npm run -s _homeyRun -- deploy:patch && exit; npm run _dbuild -- patch && npm run _release && athom app publish",
         "deploy:minor": "npm run -s _homeyRun -- deploy:minor && exit; npm run _dbuild -- minor && npm run _release && athom app publish",
