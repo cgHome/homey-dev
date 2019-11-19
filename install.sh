@@ -19,7 +19,7 @@ fi
 if [[ -n "$(declare -F homey-run)" ]]; then 
     echo "homey-run bash-function already exist";
 else 
-    CMD='homey-run() { ARGS=${@}; homey npm run-script "$ARGS"; }';
+    CMD='homey-run() { ARGS=${@}; homey-dev npm run-script "$ARGS"; }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
     echo "homey-run bash-function added";
 fi
@@ -37,7 +37,7 @@ else
             --mount type=bind,source=${HOME}/.gitconfig,target=/root/.gitconfig,consistency=default \
             --env GITHUB_USER=$(git config user.name) \
             cghome/homey-dev &&
-        homey athom login && 
+        homey-dev athom login && 
         echo "Container ${PWD##*/} started";
     }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
@@ -68,8 +68,8 @@ else
         homey-start &&
         echo "Create ${PWD##*/} git repository..." &&
         git init &&
-        homey npm init -y 1>/dev/null && 
-        homey npm run createRepo &&
+        homey-dev npm init -y 1>/dev/null && 
+        homey-dev npm run createRepo &&
         git add . && git commit -m '\''Initial commit'\'' &&       
         git push -u origin master &&
         echo "Homey-App ${PWD##*/} & Dev container created";
