@@ -52,11 +52,11 @@ curl -s https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | b
 ## Uninstall
 
 ```bash
-unset -f homey homey-run homey-start homey-createApp && rm ~/.bashrc
+unset -f homey-dev homey-run homey-start homey-createApp && rm ~/.bashrc
 
 # OR remove the homey bash-functions on ~/.bashrc
 
-unset -f homey homey-run homey-start homey-createApp && nano ~/.bashrc
+unset -f homey-dev homey-run homey-start homey-createApp && nano ~/.bashrc
 ```
 
 ## Upgrade
@@ -67,7 +67,7 @@ unset -f homey homey-run homey-start homey-createApp && nano ~/.bashrc
 [app-root] docker rmi cghome/homey-dev
 
 # Reinstall the Homey-Dev bash-functions (if needed)
-unset -f homey homey-run homey-start homey-createApp && nano ~/.bashrc
+unset -f homey-dev homey-run homey-start homey-createApp && nano ~/.bashrc
 curl -s https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | bash && source ~/.bashrc
 
 # Start new Homey-Dev app-container
@@ -83,7 +83,7 @@ curl -s https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | b
 ### Bash commands
 
 ```bash
-homey <command>         Run a bash command inside your homey-dev container
+homey-dev <command>         Run a bash command inside your homey-dev container
 homey-run <npm-script>  Run a npm-script inside homey-dev container
 
 homey-start             Start a homey-dev container for your homey-app
@@ -141,7 +141,7 @@ curl -s https://raw.githubusercontent.com/cgHome/homey-dev/master/install.sh | b
 ### Step 2b: Migration of the <package.json> file into the Homey-Dev environment
 
 ```bash
-[app-root] homey npm init -y
+[app-root] homey-dev npm init -y
 ```
 
 ### Step 3: Add Remote (node.js) debuger
@@ -212,6 +212,10 @@ module.exports = App;
 (*1 = If node.js is installed on host)
 
 ## Changelog
+
+v0.3.0
+
+- Rename homey bash-cmd to homey-dev
 
 v0.2.2
 

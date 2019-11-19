@@ -2,18 +2,18 @@
 echo "Install (docker) homey-dev environment"
 
 # Mac OS X .bashrc not working, to fix see: https://superuser.com/a/244990
-# To delete run: unset -f homey homey-run homey-init homey-start homey-create && rm ~/.bashrc OR remove the function on nano ~/.bashrc
+# To delete run: unset -f homey-dev homey-run homey-init homey-start homey-create && rm ~/.bashrc OR remove the function on nano ~/.bashrc
 
 # Load current bashrc-file
 [[ -f ~/.bashrc ]] && source ~/.bashrc || echo "~/.bashrc not exist";
 
 # Run a bash command inside homey-dev container
-if [[ -n "$(declare -F homey)" ]]; then 
-    echo "homey bash-function already exist";
+if [[ -n "$(declare -F homey-dev)" ]]; then 
+    echo "homey-dev bash-function already exist";
 else
-    CMD='homey() { ARGS=${@}; docker exec -ti ${PWD##*/} sh -c "$ARGS"; }';
+    CMD='homey-dev() { ARGS=${@}; docker exec -ti ${PWD##*/} sh -c "$ARGS"; }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
-    echo "homey bash-function added";
+    echo "homey-dev bash-function added";
 fi
 # Run npm-script inside homey-dev container
 if [[ -n "$(declare -F homey-run)" ]]; then 
