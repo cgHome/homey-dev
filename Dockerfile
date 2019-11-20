@@ -18,7 +18,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
 RUN echo 'alias git=hub' >> /root/.bashrc
      
 RUN npm install -g \
-    athom-cli
+    homey
 
 COPY .npm-init.js /root
 RUN npm config set init-module /root/.npm-init.js -g
