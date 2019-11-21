@@ -216,6 +216,7 @@ module.exports = App;
 v0.3.0
 
 - Rename homey bash-cmd to homey-dev
+- Change npm-package athom-cli to homey
 
 v0.2.2
 

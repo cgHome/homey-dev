@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+
 echo "Install (docker) homey-dev environment"
 
 # Mac OS X .bashrc not working, to fix see: https://superuser.com/a/244990
@@ -37,7 +38,7 @@ else
             --mount type=bind,source=${HOME}/.gitconfig,target=/root/.gitconfig,consistency=default \
             --env GITHUB_USER=$(git config user.name) \
             cghome/homey-dev &&
-        homey-dev athom login && 
+        homey-dev homey login && 
         echo "Container ${PWD##*/} started";
     }';
     echo "$CMD" >> ~/.bashrc; source ~/.bashrc;
@@ -62,7 +63,7 @@ else
             --env GITHUB_USER=$(git config user.name) \
             cghome/homey-dev &&
         echo "Create homey-app..." &&
-        docker exec -it homey-dev sh -c "athom login && athom app create" &&
+        docker exec -it homey-dev sh -c "homey login && homey app create" &&
         docker container rm -f homey-dev &&
         cd $(ls -td */ | head -n1) && 
         homey-start &&
