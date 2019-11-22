@@ -215,6 +215,7 @@ module.exports = App;
 
 v0.3.0
 
+- Some changes for the new Homey-App Store
 - Rename homey bash-cmd to homey-dev
 - Change npm-package athom-cli to homey
 

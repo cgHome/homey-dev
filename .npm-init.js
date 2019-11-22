@@ -33,7 +33,7 @@ const data = {
         email: appJson.author.email,
     },
     license: "GPL-3.0",
-    homepage: "https://apps.athom.com/app/" + appJson.id,
+    homepage: "https://homey.app/a/" + appJson.id,
 };
 
 // package.json value
