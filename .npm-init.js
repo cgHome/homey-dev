@@ -17,7 +17,7 @@ const data = {
         "test": "npm run -s _homeyRun -- test && exit; homey app run",
         "setup": "npm run -s _homeyRun -- setup && exit; homey app install",
         "build": "npm run -s _homeyRun -- build && exit; homey app build && npm run init:app",
-		"deploy:patch": "npm run -s _homeyRun -- deploy:patch && exit; npm run _dbuild -- patch && homey app publish && npm run _release",
+	    "deploy:patch": "npm run -s _homeyRun -- deploy:patch && exit; npm run _dbuild -- patch && homey app publish && npm run _release",
 		"deploy:minor": "npm run -s _homeyRun -- deploy:minor && exit; npm run _dbuild -- minor && homey app publish && npm run _release",
 		"deploy:major": "npm run -s _homeyRun -- deploy:major && exit; npm run _dbuild -- major && homey app publish && npm run _release",
         "init:app": "npm run -s _homeyRun -- init:app && exit; npm init --quiet -y 1>/dev/null",
