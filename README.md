@@ -2,6 +2,8 @@
 
 Homey (docker) development environment
 
+:no_entry: [DEPRECATED] Active at https://github.com/cghome/create-homey-app
+
 ## Intro
 
 After my old MacMini had died (RIP), I decided that my new computer (MacBook Pro) should no longer be a "Node.js Versions Messi". Because different server applications need different configurations and versions to load and manage. For example, if a Node.js app has not been used for a while, there is a good chance that it won't work properly anymore and you have to adapt the whole environment first. Only to find out afterwards, that there are new problems with another server app.
